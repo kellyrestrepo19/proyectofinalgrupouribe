@@ -9,26 +9,39 @@ import java.util.List;
 @Entity
 @Table(name="empleados")
 public class Empleado {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ide")
+    @Column(name="id")
     private Integer id;
-    @Column(name = "docunemto")
+    @Column(name="documento")
     private String documento;
-    @Column(name = "nombre")
-    private String nombre;
-    @Column(name = "apellido")
-    private String apellido;
-    @Column(name = "tipoEmpleado")
+    @Column(name="nombres")
+    private String nombres;
+    @Column(name="apellidos")
+    private String apellidos;
+    @Column(name="contacto")
+    private String contacto;
+
+    @Column(name="tipoEmpleado")
     private String tipoEmpleado;
-    @Column(name = "salario")
+
+    @Column(name="salario")
     private Double salario;
 
-    @ManyToMany(mappedBy = "empleado")
+    @OneToMany(mappedBy = "empleado")
     @JsonManagedReference
     private List<Viajes> viajes=new ArrayList<Viajes>();
 
     public Empleado() {
+    }
+
+    public List<Viajes> getViajes() {
+        return viajes;
+    }
+
+    public void setViajes(List<Viajes> viajes) {
+        this.viajes = viajes;
     }
 
     public Integer getId() {
@@ -47,20 +60,28 @@ public class Empleado {
         this.documento = documento;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getContacto() {
+        return contacto;
+    }
+
+    public void setContacto(String contacto) {
+        this.contacto = contacto;
     }
 
     public String getTipoEmpleado() {
@@ -77,13 +98,5 @@ public class Empleado {
 
     public void setSalario(Double salario) {
         this.salario = salario;
-    }
-
-    public List<Viajes> getViajes() {
-        return viajes;
-    }
-
-    public void setViajes(List<Viajes> viajes) {
-        this.viajes = viajes;
     }
 }

@@ -2,35 +2,41 @@ package com.example.viaticosonline.entidades;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import org.springframework.scheduling.support.SimpleTriggerContext;
+
 @Entity
 @Table(name="viajes")
 public class Viajes {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name="id")
-    private String id;
+    private Integer id;
+
     @Column(name="destino")
     private String destino;
+
     @Column(name="descripcion")
     private String descripcion;
+
     @Column(name="fechainicio")
     private String fechaInicio;
+
     @Column(name="fechafin")
     private String fechaFin;
+
     @Column(name="gastospasajes")
     private Double gastosPasajes;
-    @Column(name="gastostransporte")
+
+    @Column(name="gastotransporte")
     private Double gastosTransporte;
+
     @Column(name="gastosalimentacion")
     private Double gastosAlimentacion;
-    @ManyToMany(optional = false)
+
+    @ManyToOne(optional = false)
     @JoinColumn(name="fk_viaje",referencedColumnName = "id")
     @JsonBackReference
-
     private Empleado empleado;
-
 
 
     public Viajes() {
@@ -44,11 +50,11 @@ public class Viajes {
         this.empleado = empleado;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
